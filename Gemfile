@@ -44,4 +44,5 @@ end
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
-gem 'haml'
+gem 'haml', '~> 4.0'
+gem 'haml-rails'
