@@ -43,6 +43,16 @@ end
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
-
 gem 'haml', '~> 4.0'
 gem 'haml-rails'
+
+group :development do
+  gem 'capistrano', '~> 3.0.0'
+  gem 'capistrano-rvm'
+  gem 'capistrano-bundler'
+  gem 'capistrano-rails'
+  gem 'capistrano-nginx'
+  gem 'foreman'
+end
+
+gem 'her'
