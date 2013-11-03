@@ -1,4 +1,6 @@
 Eniv::Application.routes.draw do
+  resources :vines
+
   resources :vines, path: 'v'
   # resources :users, path: 'u'
 

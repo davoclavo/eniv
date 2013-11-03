@@ -17,3 +17,6 @@
 
 # Ignore sensitive data
 config/database.yml
+
+# Ignore environment
+.env

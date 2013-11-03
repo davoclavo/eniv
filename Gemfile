@@ -52,7 +52,10 @@ group :development do
   gem 'capistrano-bundler'
   gem 'capistrano-rails'
   gem 'capistrano-nginx'
-  gem 'foreman'
 end
 
 gem 'her'
+gem 'request_store', '~> 1.0.5'
+
+gem 'puma'
+gem 'foreman'
