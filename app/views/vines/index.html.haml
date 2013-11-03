@@ -1,0 +1,17 @@
+%h1 Listing vines
+
+%table
+  %tr
+    %th
+    %th
+    %th
+
+  - @vines.each do |vine|
+    %tr
+      %td= link_to 'Show', vine
+      %td= link_to 'Edit', edit_vine_path(vine)
+      %td= link_to 'Destroy', vine, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Vine', new_vine_path

@@ -17,6 +17,7 @@
 
 # Ignore sensitive data
 config/database.yml
+config/secrets.yml
 
 # Ignore environment
 .env

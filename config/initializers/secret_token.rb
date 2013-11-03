@@ -9,4 +9,4 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
-Eniv::Application.config.secret_key_base = '52ab6a8c957cf9112281630d216ea382e8b2d4ef4c17e798e0d0ef37bf040f9befc417369e240ed38b404c98f6002bbf760d6229007707ef1d51cb6393ca7150'
+Eniv::Application.config.secret_key_base = Secrets.secret_key_base

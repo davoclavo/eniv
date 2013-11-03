@@ -2,7 +2,7 @@ application_path = Dir.pwd
 railsenv = ENV['RAILS_ENV']
 
 directory application_path
-# daemonize true
+daemonize true
 
 threads 1, 6
 workers 2

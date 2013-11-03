@@ -1,0 +1,8 @@
+shared: &shared
+  api_host: https://api.vineapp.com/
+
+development:
+  *shared
+
+production:
+  *shared

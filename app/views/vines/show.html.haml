@@ -4,15 +4,15 @@
     .video-container
       .overlay{:style => "z-index: 2; position: absolute;top: 0; height: 100%; width: 100%;"}
       %a.mute-button.off{:href => "#"}
-      %video#post.video-js.vjs-default-skin{:autobuffer => "", :loop => "", :poster => "https://v.cdn.vine.co/r/thumbs/B4ACFD58CF986772441181343744_1631a8e9e68.3.1.mp4__Pvg5hGJ9TwwlFm9M0HrC6fA8hg8uq5WcCJRZM_qij2xZxXDMA8FCnLD.qzvabbN.jpg?versionId=evRarbMFppPpXRHuFql_bLgPX9op4g1E", :preload => "auto", "x-webkit-airplay" => "allow"}
-        %source{:src => "https://v.cdn.vine.co/r/videos/4AFFB38F31986772439101030400_1b5a08a109d.3.1_p6ccJfRkThhg4EmwHE87yS65WBfQpfSxtKJpkMmvujT2Jk62vo3CeKvDsSZr20lI.mp4?versionId=z2lZvVWfZ4ffbG1nEHxEnlWuz7MKmzP2", :type => "video/mp4"}
+      %video#post.video-js.vjs-default-skin{:autobuffer => "", :loop => "", :poster => @vine.thumbnailUrl, :preload => "auto", "x-webkit-airplay" => "allow"}
+        %source{:src => @vine.videoUrl, :type => "video/mp4"}
     .info
       .user
-        %img.avatar{:src => "https://v.cdn.vine.co/v/avatars/49137AA6-FF7F-4141-A890-113F606444E9-543-0000004F37F46D21.jpg?versionId=fCgEpYLwwSrexsvPOVbBdwFgwqhNDigL"}
-          %h2 Nicholas Megalis
+        %img.avatar{:src => @vine.avatarUrl}
+          %h2= @vine.username
       %h1
         .inner
-          %p ALIEN RAP.
+          %p= @vine.description
       .shot-with-vine
         %img{:height => "30", :src => "https://d3422saexnbpnl.cloudfront.net/static/images/shot_with_vine.png", :width => "171"}
           %a.action-button{:href => "https://get.vine.co"} Download App

@@ -10,8 +10,8 @@ set :scm, :git
 # set :log_level, :debug
 # set :pty, true
 
-# set :linked_files, %w{config/database.yml}
-# set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
+set :linked_files, %w{config/database.yml config/secrets.yml .env}
+set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
 
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
 # set :keep_releases, 5
@@ -36,7 +36,6 @@ namespace :deploy do
   end
 
   after :finishing, 'deploy:cleanup'
-
 end
 
 
@@ -67,3 +66,34 @@ task :install_nginx do
   run "#{sudo} apt-get -y update"
   run "#{sudo} apt-get -y install nginx"
 end
+
+namespace :foreman do
+  # desc "Export the Procfile to Ubuntu's upstart scripts"
+  # task :export, :roles => :app do
+  #   run "cd /var/www/eniv && sudo bundle exec foreman export upstart /etc/init -a eniv -u ossum-user -l /var/www/eniv/log"
+  # end
+  
+  desc "Start the application services"
+  task :start do
+    on roles(:app) do
+      run "start web"
+    end
+  end
+ 
+  desc "Stop the application services"
+  task :stop do
+    on roles(:app) do
+      run "stop web"
+    end
+  end
+ 
+  desc "Restart the application services"
+  task :restart do
+    on roles(:app) do
+      run "start web || restart web"
+    end
+  end
+end
+ 
+after "deploy:update", "foreman:export"
+after "deploy:update", "foreman:restart"

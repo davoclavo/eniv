@@ -2,7 +2,7 @@ application_path = Dir.pwd
 
 threads 1, 6
 workers 2
-
+port 3000
 # on_worker_boot do
 #   require "active_record"
 #   cwd = File.dirname(__FILE__)+"/.."
