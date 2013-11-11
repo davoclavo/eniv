@@ -108,6 +108,7 @@ GEM
     minitest (4.7.5)
     multi_json (1.8.0)
     multipart-post (1.2.0)
+    mysql2 (0.3.14)
     net-scp (1.1.2)
       net-ssh (>= 2.6.5)
     net-ssh (2.7.0)
@@ -201,6 +202,7 @@ DEPENDENCIES
   her
   jbuilder (~> 1.2)
   jquery-rails
+  mysql2
   oj
   puma
   rails (= 4.0.0)
