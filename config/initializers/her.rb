@@ -7,7 +7,7 @@ end
 
 Her::API.setup url: Settings.api_host do |c|
   # Request
-  c.use Faraday::Request::UrlEncoded
+  # c.use Faraday::Request::UrlEncoded
   c.use VineHeaderInjector
 
   c.use ResponseBodyLogger,                   $logger

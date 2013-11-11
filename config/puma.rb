@@ -1,7 +1,6 @@
 #!/usr/bin/env puma
 rails_root=ENV['RAILS_ROOT']
 
-
 directory rails_root
 environment ENV['RAILS_ENV']
 # daemonize true

@@ -11,7 +11,7 @@ set :scm, :git
 # set :pty, true
 # set :shell, '/bin/bash'
 
-set :linked_files, %w{config/database.yml config/secrets.yml .env}
+set :linked_files, %w{config/database.yml config/secrets.yml .env .fog}
 set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
 
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }

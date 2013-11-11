@@ -21,3 +21,6 @@ config/secrets.yml
 
 # Ignore environment
 .env
+
+# Ignore fog config
+.fog
