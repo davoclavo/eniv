@@ -12,7 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require turbolinks
+// require turbolinks
 //= require videojs/video
 //= require jquery.cookie
 //= require_tree .
