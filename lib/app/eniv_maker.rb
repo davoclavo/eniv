@@ -6,15 +6,15 @@ class EnivMaker
   VINE_URL_REGEX = /<meta property="twitter:player:stream" content="([^"]+)">/
   VINE_ID_REGEX = /<meta property="twitter:app:url:iphone" content="vine:\/\/post\/(\d+)">/
   VINE_USER_AVATAR_REGEX = /<img src="([^"]+)" class="avatar">/
-  VINE_USER_NAME_REGEX = /<h2>([^<]+)<\/h2>/
-  VINE_DESCRIPTION_REGEX = /<meta property="twitter:description" content="([^"]+)">/
+  VINE_USER_NAME_REGEX = /<p class="username">([^<]+)<\/p>/
+  VINE_DESCRIPTION_REGEX = /<p class="description">([^"]+)<\/p>/
   VINE_THUMBNAIL_REGEX = /<meta property="twitter:image" content="([^"]+)">/
 
 
 
   TMP_PATH = Rails.root.join 'tmp/enivs'
 
-  attr_accessor :file, :hashed_id, :vine_id, :response, :html, :video_url, :post, :user_id, :user_name, :post_description, :thumbnail_url, :avatar_url
+  attr_accessor :file, :hashed_id, :vine_id, :response, :video_url, :post, :user_id, :user_name, :post_description, :thumbnail_url, :avatar_url
 
   def initialize(hashed_id)
     self.hashed_id = hashed_id
@@ -36,7 +36,7 @@ class EnivMaker
   def scrape_attributes
     response = open(vine_url)
     # response 200?
-    self.html = response.read
+    html = response.read
     self.vine_id = VINE_ID_REGEX.match(html)[1].to_i
     self.video_url = VINE_URL_REGEX.match(html)[1]
     self.avatar_url = VINE_USER_AVATAR_REGEX.match(html)[1]

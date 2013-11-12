@@ -74,7 +74,11 @@ class PostsController < ApplicationController
         @post = PostResource.find(params[:id]) unless @post
       elsif params[:id] =~ /^\w+$/
         @post = Post.find_by_hashed_id(params[:id])
-        @post = EnivMaker.new(params[:id]).reverse unless @post
+        unless @post
+          em = EnivMaker.new(params[:id])
+          @post = em.scrape_attributes
+          em.delay(queue: 'reversing').reverse
+        end
       else
         @post = Post.first(:order => "RAND()")
         # @post = Post.first(:order => "RANDOM()") # For Postgres
