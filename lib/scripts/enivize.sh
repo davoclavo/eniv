@@ -4,7 +4,7 @@
 # http://stackoverflow.com/questions/2553448/encode-video-is-reverse
 # http://superuser.com/questions/533695/how-can-i-convert-a-series-of-png-images-to-a-video-for-youtube
 # https://sites.google.com/site/linuxencoding/ffmpeg-tips
-tmp=`mktemp -d -t eniv`
+tmp=`mktemp -d -t eniv.reverserXXXXXXXXXX`
 mkdir -p $tmp
 
 cd $tmp
