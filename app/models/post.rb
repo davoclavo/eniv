@@ -9,8 +9,9 @@ class Post < ActiveRecord::Base
     EnivMaker.new(self).reverse
   end
 
-  def fetch
-    RemotePost.new(self).add
+  def fetch(id)
+    rp = RemotePost.find(id)
+    rp.add
   end
 
 end

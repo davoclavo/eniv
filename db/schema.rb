@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131111060854) do
+ActiveRecord::Schema.define(version: 20131115061601) do
 
   create_table "delayed_jobs", force: true do |t|
     t.integer  "priority",   default: 0, null: false
@@ -27,10 +27,10 @@ ActiveRecord::Schema.define(version: 20131111060854) do
     t.datetime "updated_at"
   end
 
-  add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
+  add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority"
 
   create_table "posts", force: true do |t|
-    t.string   "vine_id",            null: false
+    t.string   "vine_id",             null: false
     t.string   "hashed_id"
     t.integer  "user_id"
     t.text     "video_url"
@@ -39,9 +39,19 @@ ActiveRecord::Schema.define(version: 20131111060854) do
     t.datetime "updated_at"
     t.string   "description"
     t.text     "thumbnail_url"
+    t.string   "share_url"
+    t.string   "foursquare_venue_id"
+    t.datetime "vine_created_at"
+    t.text     "video_low_url"
+    t.boolean  "verified"
+    t.boolean  "post_to_facebook"
+    t.boolean  "post_to_twitter"
+    t.integer  "repost_count"
+    t.integer  "like_count"
+    t.integer  "post_flags"
   end
 
-  add_index "posts", ["user_id"], name: "index_posts_on_user_id", using: :btree
+  add_index "posts", ["user_id"], name: "index_posts_on_user_id"
 
   create_table "users", force: true do |t|
     t.string   "vine_id"
@@ -49,6 +59,18 @@ ActiveRecord::Schema.define(version: 20131111060854) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "avatar_url"
+    t.string   "description"
+    t.string   "location"
+    t.string   "locale"
+    t.boolean  "private"
+    t.boolean  "verified"
+    t.boolean  "explicit_content"
+    t.boolean  "reposts_enabled"
+    t.integer  "following_count"
+    t.integer  "follower_count"
+    t.integer  "post_count"
+    t.integer  "authored_post_count"
+    t.integer  "like_count"
   end
 
 end
