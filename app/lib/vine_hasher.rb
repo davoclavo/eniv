@@ -1,4 +1,4 @@
-module VineHasher
+class VineHasher
   VINE_KEY = 'BuzaW7ZmKAqbhMOei5J1nvr6gXHwdpDjITtFUPxQ20E9VY3Ll'
   VINE_KEY_SIZE = VINE_KEY.size
   VINE_KEY_HASH = VINE_KEY.split('').each_with_index.inject({}) {|hash, (key, index)| hash[key] = index; hash }

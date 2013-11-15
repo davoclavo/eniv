@@ -1,7 +1,4 @@
 class Post < ActiveRecord::Base
-
-  include VineHasher
-
   belongs_to :user
   validates :vine_id, uniqueness: true
 
@@ -9,7 +6,7 @@ class Post < ActiveRecord::Base
     EnivMaker.new(self).reverse
   end
 
-  def fetch(id)
+  def self.fetch(id)
     rp = RemotePost.find(id)
     rp.add
   end

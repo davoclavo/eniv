@@ -31,11 +31,14 @@ class EnivMaker
       :body   => File.open(tmp_file_path),
       :public => true
     })
-    @post.update(reversed_video_url: @file.public_url)
   end
 
   def get_file
     @file = directory.files.get(file_name)
+  end
+
+  def update_post
+    @post.update(reversed_video_url: @file.public_url)
   end
 
   def reverse
@@ -43,5 +46,6 @@ class EnivMaker
       enivize
       store_file
     end
+    update_post
   end
 end

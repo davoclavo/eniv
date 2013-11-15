@@ -69,12 +69,11 @@ class PostsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_post
       id = VineHasher.unhash_id(params[:id])
-      p id
       @post = Post.find_by_vine_id(id)
-      # unless @post
-      #   @post = RemotePost.find(params[:id])
-      #   @post.delay(queue: 'reversing').reverse_video
-      # end
+      unless @post
+        @post = Post.fetch(id)
+        @post.delay(queue: 'reversing').reverse_video
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
