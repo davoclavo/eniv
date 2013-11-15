@@ -13,11 +13,13 @@ Her::API.setup url: Settings.api_host do |c|
   # Response
   c.use Her::Middleware::DefaultParseJSON
   c.use VineParser
-  c.use GzipExtractor
-  # c.use Faraday::Response::RaiseError         # raise exceptions on 40x, 50x responses
 
   c.use ResponseBodyLogger,                   $logger
   c.use Faraday::Response::Logger,            $logger
+  c.use GzipExtractor
+  # c.use Faraday::Response::RaiseError         # raise exceptions on 40x, 50x responses
+
+
 
   # Adapter
   c.use Faraday::Adapter::NetHttp
