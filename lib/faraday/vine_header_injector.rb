@@ -1,6 +1,6 @@
 class VineHeaderInjector < Faraday::Middleware
   def call(env)
-    env[:request_headers]['vine-session-id'] = RequestStore.store[:my_api_token]
+    env[:request_headers]['vine-session-id'] = RequestStore.store[:my_api_token] || Secrets.vine_session_id
 
     env[:request_headers]['Content-Type']    = 'application/json; charset=utf-8'
     env[:request_headers]['User-Agent']      = 'iphone/1.3.1 (iPhone; iOS 6.1.4; Scale/2.00)'

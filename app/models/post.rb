@@ -9,4 +9,8 @@ class Post < ActiveRecord::Base
     EnivMaker.new(self).reverse
   end
 
+  def fetch
+    RemotePost.new(self).add
+  end
+
 end

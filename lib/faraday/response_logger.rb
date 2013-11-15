@@ -8,7 +8,7 @@ class ResponseBodyLogger < Faraday::Response::Middleware
   end
 
   def on_complete(env)
-    @logger.info ""
+    @logger.info "----------------------------"
     @logger.info env[:body]
     @logger.info "\n"
   end

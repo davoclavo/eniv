@@ -7,6 +7,6 @@ class ApplicationController < ActionController::Base
 
   protected
   def set_user_api_token
-    RequestStore.store[:my_api_token] = Secrets.vine_session_id # current_user.api_token # or something similar based on `session`
+    RequestStore.store[:my_api_token] = nil # current_user.api_token # or something similar based on `session`
   end
 end
