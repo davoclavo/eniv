@@ -68,21 +68,13 @@ class PostsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_post
-      p params[:id]
-      if params[:id] =~ /^\d+$/
-        @post = Post.find_by_vine_id(params[:id])
-        @post = PostResource.find(params[:id]) unless @post
-      elsif params[:id] =~ /^\w+$/
-        @post = Post.find_by_hashed_id(params[:id])
-        unless @post
-          em = EnivMaker.new(params[:id])
-          @post = em.scrape_attributes
-          em.delay(queue: 'reversing').reverse
-        end
-      else
-        @post = Post.first(:order => "RAND()")
-        # @post = Post.first(:order => "RANDOM()") # For Postgres
-      end
+      id = VineHasher.unhash_id(params[:id])
+      p id
+      @post = Post.find_by_vine_id(id)
+      # unless @post
+      #   @post = RemotePost.find(params[:id])
+      #   @post.delay(queue: 'reversing').reverse_video
+      # end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
