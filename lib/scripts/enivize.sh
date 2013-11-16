@@ -14,7 +14,7 @@ mkdir frames
 mkdir invertedframes
 
 # avconv -i vine.mp4 frames/%d.png
-ffmpeg -ss 0 -i vine.mp4 frames/%d.png
+ffmpeg -i vine.mp4 frames/%d.png
 
 
 # Inverse files

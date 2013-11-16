@@ -511,7 +511,7 @@ ul.joblist li {
     display: block;
     width: 40px;
     height: 40px;
-    background-image: url(<%= asset_path 'volume.png' %>);
+    background-image: image-url('volume.png');
 }
 
 .share-page-card .mute-button {
