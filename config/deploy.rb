@@ -32,13 +32,12 @@ namespace :deploy do
       # within release_path do
       #   execute :rake, 'cache:clear'
       # end
+      invoke 'puma:restart'
+      invoke 'delayed_job:restart'
     end
   end
 
-  after :stop,      'delayed_job:stop'
-  after :start,     'delayed_job:start'
-  after :restart,   'puma:restart'
-  after :restart,   'delayed_job:restart'
+  after :started,   'delayed_job:start'
   after :finishing, 'deploy:cleanup'
 end
 
