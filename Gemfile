@@ -40,7 +40,7 @@ gem 'haml-rails'
 
 group :development do
   gem 'capistrano', '~> 3.0.0'
-  gem 'capistrano-rvm'
+  gem 'rvm1-capistrano3'
   gem 'capistrano-bundler'
   gem 'capistrano-rails'
   gem 'capistrano-nginx'

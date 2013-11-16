@@ -10,10 +10,10 @@ set :scm, :git
 # set :log_level, :debug
 # set :pty, true
 # set :shell, '/bin/bash'
-
+set :default_shell, :bash
 set :linked_files, %w{config/database.yml config/secrets.yml .env .fog}
 set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
-
+set :rvm_type, :user
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
 # set :keep_releases, 5
 
@@ -32,13 +32,14 @@ namespace :deploy do
       # within release_path do
       #   execute :rake, 'cache:clear'
       # end
-      invoke 'puma:restart'
-      invoke 'delayed_job:restart'
     end
   end
 
-  after :started,   'delayed_job:start'
-  after :finishing, 'deploy:cleanup'
+  # before :setup,     'rvm:install_rvm'
+  after  :started,   'delayed_job:start'
+  after  :restart,   'puma:restart'
+  after  :restart,   'delayed_job:restart'
+  after  :finishing, 'deploy:cleanup'
 end
 
 
