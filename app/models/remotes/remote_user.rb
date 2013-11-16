@@ -10,14 +10,14 @@ class RemoteUser
       private:              self.private,
       post_count:           self.postCount,
       authored_post_count:  self.authoredPostCount,
-      likes_count:          self.likeCount,
-      repost_count:         self.repostCount,
+      like_count:           self.likeCount,
       follower_count:       self.followerCount,
       following_count:      self.followingCount,
       explicit_content:     self.explicitContent,
       verified:             self.verified,
       location:             self.location,
-      avatar_url:           self.avatarUrl
+      avatar_url:           self.avatarUrl,
+      reposts_enabled:      self.repostsEnabled
     })
     user
   end

@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(version: 20131115061601) do
     t.datetime "updated_at"
   end
 
-  add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority"
+  add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
 
   create_table "posts", force: true do |t|
     t.string   "vine_id",             null: false
@@ -51,7 +51,7 @@ ActiveRecord::Schema.define(version: 20131115061601) do
     t.integer  "post_flags"
   end
 
-  add_index "posts", ["user_id"], name: "index_posts_on_user_id"
+  add_index "posts", ["user_id"], name: "index_posts_on_user_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "vine_id"

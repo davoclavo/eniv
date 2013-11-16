@@ -4,14 +4,14 @@ class RemotePost
 
   def add
     user = User.find_or_initialize_by_vine_id(self.userId)
-    user.update_attributes({
+    user.update_attributes(
       username:          self.username,
       private:           self.private,
       explicit_content:  self.explicitContent,
       verified:          self.verified,
       location:          self.location,
       avatar_url:        self.avatarUrl
-    })
+    )
 
     # self.myRepostId
     # self.postFlags
@@ -19,7 +19,7 @@ class RemotePost
     # self.likes
 
     post = Post.find_or_initialize_by_vine_id(self.postId)
-    post.update_attributes({
+    post.update_attributes(
       user:                 user,
       description:          self.description,
       hashed_id:            VineHasher.hash_id(self.postId),
@@ -35,7 +35,7 @@ class RemotePost
       like_count:           self.likes['count'],
       post_to_facebook:     self.postToFacebook,
       post_to_twitter:      self.postToTwitter
-    })
+    )
     post
   end
 end

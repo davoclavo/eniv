@@ -35,8 +35,11 @@ namespace :deploy do
     end
   end
 
-  after :finishing, 'deploy:cleanup'
+  after :stop,      'delayed_job:stop'
+  after :start,     'delayed_job:start'
   after :restart,   'puma:restart'
+  after :restart,   'delayed_job:restart'
+  after :finishing, 'deploy:cleanup'
 end
 
 
