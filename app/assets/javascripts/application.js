@@ -13,6 +13,6 @@
 //= require jquery
 //= require jquery_ujs
 // require turbolinks
-//= require videojs/video
+//= require divine-player
 //= require jquery.cookie
 //= require_tree .

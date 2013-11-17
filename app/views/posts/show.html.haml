@@ -1,20 +1,23 @@
-%meta{:content => "width=device-width, minimum-scale=1.0, maximum-scale=1.0", :name => "viewport"}
 %body.share-page
   .card
     .video-container
-      .overlay{:style => "z-index: 2; position: absolute;top: 0; height: 100%; width: 100%;"}
-      %a.mute-button.off{:href => "#"}
-      %video#post.video-js.vjs-default-skin{:autobuffer => "", :loop => "", :poster => @post.thumbnail_url, :preload => "auto", "x-webkit-airplay" => "allow"}
-        %source{:src => @post.reversed_video_url || @post.video_url, :type => "video/mp4"}
+      .overlay
+      #container
+        %video#video{autoplay: "", loop: "", muted: "", poster: @post.thumbnail_url, preload: "auto"}
+          %source{src: @post.reversed_video_url || @post.video_url, type: "video/mp4"}
+      %a.mute-button.on{href: "#"}
     .info
-      .user
-        %img.avatar{:src => @post.user.avatar_url}
-          %h2= @post.user.username
-      %h1
-        .inner
-          %p= @post.description
-          - if @post.reversed_video_url.nil?
-            %h2 Enivizing...
-      .shot-with-vine
-        %img{:height => "30", :src => "https://d3422saexnbpnl.cloudfront.net/static/images/shot_with_vine.png", :width => "171"}
-          %a.action-button{:href => "https://get.vine.co"} Download App
+      .info-container
+        .avatar-container
+          %img.avatar{src: @post.user.avatar_url}/
+        %p.username= @post.user.username
+        %p.description= @post.description
+        - if @post.reversed_video_url.nil?
+          %h2 Enivizing...
+        %p.post-metadata
+          %span.timestamp
+  .shot-with-vine
+    %span Made with
+    %a{href: "http://eniv.co"}
+      / = image_tag 'eniv_logo'
+    %a.app-button{href: "https://get.vine.co"} Download Vine

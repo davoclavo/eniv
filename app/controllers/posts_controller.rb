@@ -10,6 +10,11 @@ class PostsController < ApplicationController
   # GET /posts/1
   # GET /posts/1.json
   def show
+    gon.push(
+      created_at: @post.created_at,
+      description: @post.description,
+      share_url: @post.share_url
+    )
     respond_to do |format|
       format.html
       format.json { render json: @post.attributes}
