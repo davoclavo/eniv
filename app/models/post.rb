@@ -1,14 +1,15 @@
 class Post < ActiveRecord::Base
+  extend RemoteBased
+
   belongs_to :user
-  validates :vine_id, uniqueness: true
+  has_many   :likes
+  has_many   :comments
+  has_many   :reposts
+  has_many   :entities
+  validates  :vine_id, uniqueness: true
 
   def reverse_video
     EnivMaker.new(self).reverse
-  end
-
-  def self.fetch(id)
-    rp = RemotePost.find(id)
-    rp.add
   end
 
 end

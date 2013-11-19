@@ -3,7 +3,7 @@ class RemotePost
   collection_path "timelines/posts"
 
   def add
-    user = User.find_or_initialize_by_vine_id(self.userId)
+    user = User.find_or_initialize_by(vine_id: self.userId)
     user.update_attributes(
       username:          self.username,
       private:           self.private,
@@ -13,12 +13,7 @@ class RemotePost
       avatar_url:        self.avatarUrl
     )
 
-    # self.myRepostId
-    # self.postFlags
-    # self.comments
-    # self.likes
-
-    post = Post.find_or_initialize_by_vine_id(self.postId)
+    post = Post.find_or_initialize_by(vine_id: self.postId)
     post.update_attributes(
       user:                 user,
       description:          self.description,
@@ -36,6 +31,85 @@ class RemotePost
       post_to_facebook:     self.postToFacebook,
       post_to_twitter:      self.postToTwitter
     )
+
+    self.entities.each do |record|
+      entity_type = EntityType.where(name: record['type']).first_or_create
+
+      target = entity_type.target_class.find_or_initialize_by(vine_id: record['id'])
+      target.update_attributes(
+        title: record['title']
+        )
+
+      entity = Entity.where(entity_type: entity_type,
+                            range:       record['range'],
+                            post:        post,
+                            target_id:   target.id
+                            ).first_or_create
+      entity.update_attributes(
+        title: record['title']
+        )
+    end
+
+    # self.myRepostId
+    # self.locale
+
+    self.comments['records'].each do |record|
+      user = User.find_or_initialize_by(vine_id: record['userId'])
+      user.update_attributes(
+        username:          record['username'],
+        private:           record['user']['private'],
+        verified:          record['verified'],
+        location:          record['location'],
+        avatar_url:        record['avatarUrl']
+      )
+
+      comment = Comment.find_or_initialize_by(vine_id: record['commentId'])
+      comment.update_attributes(
+        user: user,
+        post: post,
+        vine_created_at: DateTime.parse(record['created'])
+      )
+
+      comment.try('entities').each do |record|
+        entity_type = EntityType.find_or_initialize_by(name: record['type'])
+
+        target = entity_type.target_class.find_or_initialize_by(vine_id: record['id'])
+        target.update_attributes(
+          title: record['title']
+          )
+
+        entity = Entity.where(entity_type: entity_type,
+                              range:       "[#{record['range'][0]}-#{record['range'][0]}]",
+                              comment:     comment,
+                              post:        post,
+                              target_id:   target.id
+                              ).first_or_create
+        entity.update_attributes(
+          title: record['title']
+          )
+      end
+
+    end
+
+    self.likes['records'].each do |record|
+      user = User.find_or_initialize_by(vine_id: record['userId'])
+      user.update_attributes(
+        username:          record['username'],
+        private:           record['user']['private'],
+        verified:          record['verified'],
+        location:          record['location'],
+        avatar_url:        record['avatarUrl']
+      )
+      p record
+      like = Like.find_or_initialize_by(vine_id: record['likeId'])
+      like.update_attributes(
+        user: user,
+        post: post,
+        vine_created_at: DateTime.parse(record['created'])
+      )
+    end
     post
   end
+
+
 end

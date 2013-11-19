@@ -11,7 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131115061601) do
+ActiveRecord::Schema.define(version: 20131119011147) do
+
+  create_table "comments", force: true do |t|
+    t.string   "vine_id",         null: false
+    t.integer  "user_id"
+    t.integer  "post_id"
+    t.datetime "vine_created_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "comments", ["post_id"], name: "index_comments_on_post_id", using: :btree
+  add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
+  add_index "comments", ["vine_id"], name: "index_comments_on_vine_id", using: :btree
 
   create_table "delayed_jobs", force: true do |t|
     t.integer  "priority",   default: 0, null: false
@@ -28,6 +41,38 @@ ActiveRecord::Schema.define(version: 20131115061601) do
   end
 
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
+
+  create_table "entities", force: true do |t|
+    t.string   "title"
+    t.string   "range"
+    t.integer  "entity_type_id"
+    t.integer  "target_id"
+    t.integer  "post_id"
+    t.integer  "comment_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "entities", ["comment_id"], name: "index_entities_on_comment_id", using: :btree
+  add_index "entities", ["entity_type_id"], name: "index_entities_on_entity_type_id", using: :btree
+  add_index "entities", ["post_id"], name: "index_entities_on_post_id", using: :btree
+
+  create_table "entity_types", force: true do |t|
+    t.string "name"
+  end
+
+  create_table "likes", force: true do |t|
+    t.string   "vine_id",         null: false
+    t.integer  "user_id"
+    t.integer  "post_id"
+    t.datetime "vine_created_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "likes", ["post_id"], name: "index_likes_on_post_id", using: :btree
+  add_index "likes", ["user_id"], name: "index_likes_on_user_id", using: :btree
+  add_index "likes", ["vine_id"], name: "index_likes_on_vine_id", using: :btree
 
   create_table "posts", force: true do |t|
     t.string   "vine_id",             null: false
@@ -52,6 +97,27 @@ ActiveRecord::Schema.define(version: 20131115061601) do
   end
 
   add_index "posts", ["user_id"], name: "index_posts_on_user_id", using: :btree
+  add_index "posts", ["vine_id"], name: "index_posts_on_vine_id", using: :btree
+
+  create_table "reposts", force: true do |t|
+    t.string   "vine_id",         null: false
+    t.integer  "user_id"
+    t.integer  "post_id"
+    t.datetime "vine_created_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "reposts", ["post_id"], name: "index_reposts_on_post_id", using: :btree
+  add_index "reposts", ["user_id"], name: "index_reposts_on_user_id", using: :btree
+  add_index "reposts", ["vine_id"], name: "index_reposts_on_vine_id", using: :btree
+
+  create_table "tags", force: true do |t|
+    t.string   "vine_id"
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", force: true do |t|
     t.string   "vine_id"
@@ -72,5 +138,7 @@ ActiveRecord::Schema.define(version: 20131115061601) do
     t.integer  "authored_post_count"
     t.integer  "like_count"
   end
+
+  add_index "users", ["vine_id"], name: "index_users_on_vine_id", using: :btree
 
 end
