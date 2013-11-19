@@ -17,11 +17,16 @@ set :rvm_type, :user
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
 # set :keep_releases, 5
 
+set :puma_workers, 2
+
 namespace :deploy do
-  # task start:   'puma:start'
-  # task start:   'delayed_job:start'
-  task restart: 'puma:restart'
-  task restart: 'delayed_job:restart'
+  task  start:      'puma:start'
+  task  start:      'delayed_job:start'
+  task  stop:       'puma:stop'
+  task  stop:       'delayed_job:stop'
+
+  # after :finished,  'puma:restart' # This  is added in the capistrano-puma gem
+  after :finished,  'delayed_job:restart'
   after :finishing, 'deploy:cleanup'
 end
 
