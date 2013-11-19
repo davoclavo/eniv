@@ -1,17 +1,5 @@
-%h1 Listing users
+%h1 Users
 
-%table
-  %tr
-    %th
-    %th
-    %th
-
+%ul
   - @users.each do |user|
-    %tr
-      %td= link_to 'Show', user
-      %td= link_to 'Edit', edit_user_path(user)
-      %td= link_to 'Destroy', user, :method => :delete, :data => { :confirm => 'Are you sure?' }
-
-%br
-
-= link_to 'New User', new_user_path
+    %li= link_to user.username, user_path(user.vine_id)

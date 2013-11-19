@@ -1,6 +1,5 @@
-%p#notice= notice
-
-
-= link_to 'Edit', edit_user_path(@user)
-\|
-= link_to 'Back', users_path
+%p= @user.username
+%p= @user.vine_id
+%ul
+  - @user.posts.each do |post|
+    %li= link_to post.description, post_path(post.hashed_id)

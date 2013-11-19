@@ -1,10 +1,7 @@
 Eniv::Application.routes.draw do
-  resources :users
+  resources :users, path: 'u'
 
   resources :posts, path: 'v'
-  # resources :users, path: 'u'
-
-
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
