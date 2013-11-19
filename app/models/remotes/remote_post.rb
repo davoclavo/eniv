@@ -41,7 +41,7 @@ class RemotePost
         )
 
       entity = Entity.where(entity_type: entity_type,
-                            range:       record['range'],
+                            range:       "[#{record['range'][0]}-#{record['range'][0]}]",
                             post:        post,
                             target_id:   target.id
                             ).first_or_create
