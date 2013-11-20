@@ -44,6 +44,7 @@ group :development do
   gem 'capistrano-rails'
   gem 'capistrano-nginx'
   gem 'capistrano-puma', github: 'seuros/capistrano-puma'
+  gem 'debugger'
 end
 
 gem 'her'

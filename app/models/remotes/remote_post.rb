@@ -2,6 +2,10 @@ class RemotePost
   include Her::Model
   collection_path "timelines/posts"
 
+  def self.find(id)
+    where(id: id).fetch.first
+  end
+
   def add
     user = User.find_or_initialize_by(vine_id: self.userId)
     user.update_attributes(
